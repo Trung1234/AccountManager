@@ -4,10 +4,33 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class CreateAccountDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Accounts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AccountNumber = table.Column<int>(nullable: false),
+                    Balance = table.Column<int>(nullable: false),
+                    Firstname = table.Column<string>(nullable: true),
+                    Lastname = table.Column<string>(nullable: true),
+                    Age = table.Column<int>(nullable: false),
+                    Gender = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    Employer = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    State = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Accounts", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -197,6 +220,9 @@ namespace API.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Accounts");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 

@@ -14,12 +14,12 @@ namespace API.Models
 
         }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-
+        public DbSet<Account> Accounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //IdentityUserLogin<string>
+            modelBuilder.Entity<Account>().HasKey(c => new { c.Id});
         }
     }
 }

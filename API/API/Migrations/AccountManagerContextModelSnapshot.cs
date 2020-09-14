@@ -19,6 +19,39 @@ namespace API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("API.Models.Account", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AccountNumber");
+
+                    b.Property<string>("Address");
+
+                    b.Property<int>("Age");
+
+                    b.Property<int>("Balance");
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Employer");
+
+                    b.Property<string>("Firstname");
+
+                    b.Property<string>("Gender");
+
+                    b.Property<string>("Lastname");
+
+                    b.Property<string>("State");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Accounts");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
