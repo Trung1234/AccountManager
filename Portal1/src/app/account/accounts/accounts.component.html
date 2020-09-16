@@ -1,0 +1,45 @@
+<app-header></app-header>
+
+<p *ngIf="!(accounts | async)"><em>Loading...</em></p>
+<p>
+  <a [routerLink]="['/add']" class="btn btn-primary float-left mb-3" *ngIf="isAdmin">New </a>
+</p>
+
+<table class="table table-sm table-hover" *ngIf="(accounts | async)?.length>0">
+  <thead>
+    <tr>
+      <th>AccountNumber</th>
+      <th>Balance</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Address</th>
+      <th>Employer</th>
+      <th>Email</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let account of (accounts | async)">
+      <td>{{ account.accountNumber}}</td>
+      <td>{{ account.balance}}</td>
+      <td>{{ account.firstname}}</td>
+      <td>{{ account.lastname}}</td>
+      <td>{{ account.age}}</td>
+      <td>{{ account.gender}}</td>
+      <td>{{ account.address}}</td>
+      <td>{{ account.employer}}</td>
+      <td>{{ account.email}}</td>
+      <td>{{ account.city}}</td>
+      <td>{{ account.state}}</td>
+      <td>
+        <a [routerLink]="['/add']" class="btn btn-primary  mb-3" *ngIf="isAdmin"> Edit</a>
+        <a [routerLink]="['/add']" class="btn btn-primary  mb-3" *ngIf="isAdmin"> Delete</a>
+        <a [routerLink]="['/add']" class="btn btn-primary  mb-3"> Detail</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

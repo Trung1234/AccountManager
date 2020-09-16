@@ -11,13 +11,19 @@ import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { AccountComponent } from './account/account/account.component';
+import { AccountAddEditComponent } from './account/account-add-edit/account-add-edit.component';
+import { AccountsComponent } from './account/accounts/accounts.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    AccountComponent,
+    AccountAddEditComponent,
+    AccountsComponent
   ],
   imports: [
     BrowserModule,
