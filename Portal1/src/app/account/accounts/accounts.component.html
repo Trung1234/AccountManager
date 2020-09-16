@@ -37,7 +37,7 @@
       <td>{{ account.state}}</td>
       <td>
         <a [routerLink]="['/account/', account.id]" class="btn btn-primary  mb-3"> Detail</a>
-        <a [routerLink]="['/account/edit']" class="btn btn-primary  mb-3" *ngIf="isAdmin"> Edit</a>
+        <a [routerLink]="['/account/edit', account.id]" class="btn btn-primary  mb-3" *ngIf="isAdmin"> Edit</a>
         <a [routerLink]="" (click)="delete(account.id)"class="btn btn-primary  mb-3" *ngIf="isAdmin"> Delete</a>
       </td>
     </tr>

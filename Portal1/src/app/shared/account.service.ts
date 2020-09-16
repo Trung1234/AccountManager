@@ -30,8 +30,8 @@ export class AccountService {
     );
   }
 
-  getAccount(postId: number): Observable<AccountModel> {
-      return this.http.get<AccountModel>(this.myAppUrl + this.myApiUrl + postId)
+  getAccount(id: number): Observable<AccountModel> {
+      return this.http.get<AccountModel>(this.myAppUrl + this.myApiUrl + id)
       .pipe(
         retry(1),
         catchError(this.errorHandler)

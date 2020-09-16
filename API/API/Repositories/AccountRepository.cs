@@ -28,7 +28,13 @@ namespace API.Repositories
 
         public IEnumerable<Account> GetAll()
         {
-            return  _context.Accounts.OrderBy(x=>x.Id);
+            try
+            {
+                return _context.Accounts.FromSql($"GetAccounts");
+            }catch
+            {
+                return new List<Account>();
+            }                   
         }
 
         public async Task<Account> GetById(int id)
