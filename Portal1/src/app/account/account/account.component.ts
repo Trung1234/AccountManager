@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AccountModel } from 'src/app/models/account';
+import { AccountService } from 'src/app/shared/account.service';
 
 @Component({
   selector: 'app-account',
@@ -7,9 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountComponent implements OnInit {
 
-  constructor() { }
+  account$: Observable<AccountModel>;
+  id: number;
 
-  ngOnInit(): void {
+  constructor(private accountService: AccountService, private avRoute: ActivatedRoute) {
+    const idParam = 'id';
+    if (this.avRoute.snapshot.params[idParam]) {
+      this.id = this.avRoute.snapshot.params[idParam];
+    }
   }
+
+  ngOnInit() {
+    this.loadaccount();
+  }
+
+  loadaccount() {
+    this.account$ = this.accountService.getAccount(this.id);
+  }
+
 
 }

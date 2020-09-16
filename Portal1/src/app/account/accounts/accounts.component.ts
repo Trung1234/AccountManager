@@ -30,4 +30,13 @@ export class AccountsComponent implements OnInit {
   loadAccounts() {
     this.accounts = this.accountService.getAccounts();
   }
+
+  delete(id) {
+    const ans = confirm('Do you want to delete Account ');
+    if (ans) {
+      this.accountService.deleteAccount(id).subscribe((data) => {
+        this.loadAccounts();
+      });
+    }
+  }
 }

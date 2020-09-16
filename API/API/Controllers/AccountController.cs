@@ -98,6 +98,26 @@ namespace API.Controllers
             return CreatedAtAction("GetAccount", new { id = account.Id }, account);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAccount([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var account = await _repo.GetById(id);
+            if (account == null)
+            {
+                return NotFound();
+            }
+
+            _repo.Delete(account);
+            await _repo.SaveAsync(account);
+
+            return Ok(account);
+        }
+
         [HttpGet]
         [Route("ImportAccount")]
         public ActionResult<string> ImportAccount()

@@ -1,1 +1,21 @@
-<p>account works!</p>
+<app-header ></app-header>
+
+
+
+
+
+<ng-container *ngIf="(account$ | async) as account; else loading">
+
+  <div class="card m-5" style="width:20rem">
+    <ul class="list-group">
+      <li class="list-group-item"><strong>Account Number : </strong>{{account.accountNumber}}</li>
+      <li class="list-group-item"><strong>Balance : </strong>{{account.balance}}</li>
+      <li class="list-group-item"><strong>Email : </strong>{{account.email}}</li>
+      <li class="list-group-item"><strong>First name  : </strong>{{account.firstname}}</li>
+      <li class="list-group-item"><strong>Age : </strong>{{account.age}}</li>
+      <li class="list-group-item"><strong>City : </strong>{{account.city}}</li>
+    </ul>
+  </div>
+</ng-container>
+<ng-template #loading>Loading…</ng-template>
+
