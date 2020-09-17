@@ -1,17 +1,40 @@
 <h1>{{actionType}} account</h1>
 <form [formGroup]="form" (ngSubmit)="save()" #formDir="ngForm" novalidate>
   <div class="form-group row">
-    <label class=" control-label col-md-12">accountNumber</label>
+    <label class=" control-label col-md-12">Account Number</label>
     <div class="col-md-12">
-      <input class="form-control" type="text" formControlName="accountNumber">
+      <input class="form-control" type="number" formControlName="accountNumber">
     </div>
-
+    <span class="text-danger ml-3" *ngIf="accountNumber.invalid && formDir.submitted">
+      account Number is required.
+    </span>
   </div>
   <div class="form-group row">
-    <label class=" control-label col-md-12">balance</label>
+    <label class=" control-label col-md-12">Address</label>
     <div class="col-md-12">
-      <input class="form-control" type="text" formControlName="balance">
+      <input class="form-control" type="text" formControlName="address">
     </div>
+    <span class="text-danger ml-3" *ngIf="address.invalid && formDir.submitted">
+      Address is required.
+    </span>
+  </div>
+  <div class="form-group row">
+    <label class=" control-label col-md-12">Ages</label>
+    <div class="col-md-12">
+      <input class="form-control" type="number" formControlName="age">
+    </div>
+    <span class="text-danger ml-3" *ngIf="age.invalid && formDir.submitted">
+      Address is required.
+    </span>
+  </div>
+  <div class="form-group row">
+    <label class=" control-label col-md-12">Email</label>
+    <div class="col-md-12">
+      <input class="form-control" type="email" formControlName="email">
+    </div>
+    <span class="text-danger ml-3" *ngIf="email.invalid && formDir.submitted">
+      Email is invalid
+    </span>
   </div>
   <div class="form-group">
     <button type="submit" class="btn btn-success float-right">Save</button>

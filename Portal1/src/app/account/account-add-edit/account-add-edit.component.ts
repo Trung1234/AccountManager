@@ -47,8 +47,17 @@ export class AccountAddEditComponent implements OnInit {
     this.form = this.formBuilder.group(
       {
         id: 0,
-        accountNumber: ['', [Validators.required]],
-        balance: ['', [Validators.required]],
+        accountNumber: ['',Validators.required],
+        address: ['',Validators.required],
+        age: ['',Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        balance: ['', Validators.required],
+
+        city: ['', Validators.required],
+
+        employer: ['', Validators.required],
+        firstname: ['', Validators.required],
+        lastname: ['', Validators.required]
       }
     )
   }
@@ -58,25 +67,18 @@ export class AccountAddEditComponent implements OnInit {
     if (this.id > 0) {
       this.actionType = 'Edit';
       this.accountService.getAccount(this.id)
-      .subscribe(
-        res => {
-          console.log(res);
-          this.existingAccount = res;
-          this.form.controls[this.formAccountNumber].setValue(this.existingAccount.accountNumber);
-          this.form.controls[this.formAddress].setValue(this.existingAccount.address);
-          this.form.controls[this.formAge].setValue(this.existingAccount.age);
-          this.form.controls[this.formBalance].setValue(this.existingAccount.balance);
-          this.form.controls[this.formCity].setValue(this.existingAccount.city);
-          this.form.controls[this.formEmail].setValue(this.existingAccount.email);
-          this.form.controls[this.formEmployer].setValue(this.existingAccount.employer);
-          this.form.controls[this.formFirstname].setValue(this.existingAccount.firstname);
-          this.form.controls[this.formLastname].setValue(this.existingAccount.lastname);
-
-        },
-        err => {
-          console.log(err);
-        },
-      );
+      .subscribe(data => (
+          this.existingAccount = data,
+          this.form.controls[this.formAccountNumber].setValue(this.existingAccount.accountNumber),
+          this.form.controls[this.formAddress].setValue(this.existingAccount.address),
+          this.form.controls[this.formAge].setValue(this.existingAccount.age),
+          this.form.controls[this.formBalance].setValue(this.existingAccount.balance),
+          this.form.controls[this.formCity].setValue(this.existingAccount.city),
+          this.form.controls[this.formEmail].setValue(this.existingAccount.email),
+          this.form.controls[this.formEmployer].setValue(this.existingAccount.employer),
+          this.form.controls[this.formFirstname].setValue(this.existingAccount.firstname),
+          this.form.controls[this.formLastname].setValue(this.existingAccount.lastname)
+      ));
 
 
     }
@@ -89,6 +91,8 @@ export class AccountAddEditComponent implements OnInit {
   cancel() {
     this.router.navigate(['/']);
   }
-
-
+  get accountNumber() { return this.form.get(this.formAccountNumber); }
+  get address() { return this.form.get(this.formAddress); }
+  get age() { return this.form.get(this.formAge); }
+  get email() { return this.form.get(this.formEmail); }
 }
