@@ -25,6 +25,7 @@ export class AccountAddEditComponent implements OnInit {
   formCity: string;
   formBalance: string;
   formAge: string;
+  formGender: string;
 
 
   constructor(private accountService: AccountService, private formBuilder: FormBuilder,
@@ -40,6 +41,7 @@ export class AccountAddEditComponent implements OnInit {
     this.formCity = 'city';
     this.formBalance = 'balance';
     this.formAge = 'age';
+    this.formGender = 'gender';
     if (this.avRoute.snapshot.params[idParam]) {
       this.id = this.avRoute.snapshot.params[idParam];
     }
@@ -57,13 +59,13 @@ export class AccountAddEditComponent implements OnInit {
 
         employer: ['', Validators.required],
         firstname: ['', Validators.required],
-        lastname: ['', Validators.required]
+        lastname: ['', Validators.required],
+        gender: ['', Validators.required]
       }
     )
   }
 
   ngOnInit() {
-
     if (this.id > 0) {
       this.actionType = 'Edit';
       this.accountService.getAccount(this.id)
@@ -77,10 +79,9 @@ export class AccountAddEditComponent implements OnInit {
           this.form.controls[this.formEmail].setValue(this.existingAccount.email),
           this.form.controls[this.formEmployer].setValue(this.existingAccount.employer),
           this.form.controls[this.formFirstname].setValue(this.existingAccount.firstname),
-          this.form.controls[this.formLastname].setValue(this.existingAccount.lastname)
+          this.form.controls[this.formLastname].setValue(this.existingAccount.lastname),
+          this.form.controls[this.formGender].setValue(this.existingAccount.gender)
       ));
-
-
     }
   }
 
@@ -89,10 +90,11 @@ export class AccountAddEditComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/accounts']);
   }
   get accountNumber() { return this.form.get(this.formAccountNumber); }
   get address() { return this.form.get(this.formAddress); }
   get age() { return this.form.get(this.formAge); }
   get email() { return this.form.get(this.formEmail); }
+  get gender() { return this.form.get(this.formGender); }
 }
