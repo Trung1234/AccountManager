@@ -12,6 +12,7 @@ import { AccountService } from 'src/app/shared/account.service';
 export class AccountAddEditComponent implements OnInit {
   form: FormGroup;
   actionType: string;
+  isAdd:  boolean = true;
 
   id: number;
   errorMessage: any;
@@ -68,6 +69,7 @@ export class AccountAddEditComponent implements OnInit {
   ngOnInit() {
     if (this.id > 0) {
       this.actionType = 'Edit';
+      this.isAdd = false;
       this.accountService.getAccount(this.id)
       .subscribe(data => (
           this.existingAccount = data,
@@ -86,7 +88,29 @@ export class AccountAddEditComponent implements OnInit {
   }
 
   save() {
-
+    if (!this.form.valid) {
+      return;
+    }
+    if (this.actionType === 'Edit') {
+      let account: AccountModel = {
+        id: this.existingAccount.id,
+        accountNumber: this.existingAccount.accountNumber,
+        gender: this.form.get(this.formGender).value,
+        age: this.form.get(this.formAge).value,
+        balance: this.existingAccount.balance,
+        city: this.existingAccount.city,
+        employer: this.existingAccount.employer,
+        firstname: this.existingAccount.firstname,
+        lastname: this.existingAccount.lastname,
+        state: this.existingAccount.state,
+        email: this.form.get(this.formEmail).value,
+        address: this.form.get(this.formAddress).value
+      };
+      this.accountService.updateAccount(account.id, account)
+        .subscribe((data) => {
+          this.router.navigate([this.router.url]);
+        });
+    }
   }
 
   cancel() {
