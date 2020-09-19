@@ -91,6 +91,27 @@ export class AccountAddEditComponent implements OnInit {
     if (!this.form.valid) {
       return;
     }
+    if(this.actionType === 'Add'){
+      let account: AccountModel = {
+        id: 0,
+        accountNumber: this.form.get(this.formAccountNumber).value,
+        gender: this.form.get(this.formGender).value,
+        age: this.form.get(this.formAge).value,
+        balance: this.form.get(this.formBalance).value,
+        city: this.form.get(this.formEmployer).value,
+        employer: this.form.get(this.formEmployer).value,
+        firstname: this.form.get(this.formFirstname).value,
+        email: this.form.get(this.formEmail).value,
+        address: this.form.get(this.formAddress).value,
+        lastname: '',
+        state: ''
+      };
+
+      this.accountService.saveAccount(account)
+        .subscribe((data) => {
+          this.router.navigate(['/account', data.id]);
+        });
+    }
     if (this.actionType === 'Edit') {
       let account: AccountModel = {
         id: this.existingAccount.id,
@@ -121,4 +142,8 @@ export class AccountAddEditComponent implements OnInit {
   get age() { return this.form.get(this.formAge); }
   get email() { return this.form.get(this.formEmail); }
   get gender() { return this.form.get(this.formGender); }
+  get firstname() { return this.form.get(this.formFirstname); }
+  get city() { return this.form.get(this.formCity); }
+  get employer() { return this.form.get(this.formEmployer); }
+  get balance() { return this.form.get(this.formBalance); }
 }
