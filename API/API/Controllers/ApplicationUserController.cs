@@ -90,7 +90,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin,Customer")]
+        [Authorize(Roles = "Admin,Normal")]
         [Route("GetProfile")]
         public async Task<Object> GetUserProfile()
         {
