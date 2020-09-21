@@ -132,7 +132,7 @@ export class AccountAddEditComponent implements OnInit {
       };
       this.accountService.updateAccount(account.id, account)
         .subscribe((data) => {
-          this.router.navigate([this.router.url]);
+          this.router.navigate(['/account', data.id]);
         });
     }
   }
