@@ -1,4 +1,4 @@
-# AccountManagement Application
+# Account Management Application
 ## Web App using Angular 9 and .NET Core 2.2,Entity Framework Core, Identity ASP.NET Core
 ## To Run App:
 - Client: 
