@@ -37,7 +37,7 @@ namespace API.Controllers
         //POST : /api/ApplicationUser/Register
         public async Task<Object> PostApplicationUser(ApplicationUserViewModel model)
         {
-            model.Role = "Customer";
+            model.Role = "Normal";
             var applicationUser = new ApplicationUser()
             {
                 UserName = model.UserName,
@@ -94,7 +94,6 @@ namespace API.Controllers
         [Route("GetProfile")]
         public async Task<Object> GetUserProfile()
         {
-            //Logger.LogError();
             string userId = User.Claims.First(c => c.Type == "UserID").Value;
             var user = await _userManager.FindByIdAsync(userId);
             return new

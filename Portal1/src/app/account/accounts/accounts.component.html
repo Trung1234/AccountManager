@@ -1,45 +1,57 @@
 <app-header></app-header>
 
 <p *ngIf="!(accounts | async)"><em>Loading...</em></p>
+<div class="container-fluid">
+
+  <div class="form-group">
+    <input type="text" class="form-control bg-light text-dark" placeholder="Search Here" [(ngModel)]="searchKeyWord">
+</div>
+</div>
+<div class="card m-3">
+
+
+<p></p>
 <p>
   <a [routerLink]="['/account/add']" class="btn btn-primary float-left mb-3" *ngIf="isAdmin">New </a>
 </p>
+  <table class="table table-sm table-hover" *ngIf="(accounts | async)?.length>0">
+    <thead>
+      <tr>
+        <th>Account Number</th>
+        <th>Balance</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Address</th>
+        <th>Employer</th>
+        <th>Email</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let account of (accounts | async) | filter:searchKeyWord | paginate: { itemsPerPage: 10, currentPage: p };index as i;let odd=odd; let even=even;">
+        <td>{{ account.accountNumber}}</td>
+        <td>{{ account.balance}}</td>
+        <td>{{ account.firstname}}</td>
+        <td>{{ account.lastname}}</td>
+        <td>{{ account.age}}</td>
+        <td>{{ account.gender}}</td>
+        <td>{{ account.address}}</td>
+        <td>{{ account.employer}}</td>
+        <td>{{ account.email}}</td>
+        <td>{{ account.city}}</td>
+        <td>{{ account.state}}</td>
+        <td>
+          <a [routerLink]="['/account/', account.id]" class="btn btn-primary  mb-3"> Detail</a>
+          <a [routerLink]="['/account/edit', account.id]" class="btn btn-primary  mb-3" *ngIf="isAdmin"> Edit</a>
+          <a [routerLink]="" (click)="delete(account.id)"class="btn btn-primary  mb-3" *ngIf="isAdmin"> Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
 
-<table class="table table-sm table-hover" *ngIf="(accounts | async)?.length>0">
-  <thead>
-    <tr>
-      <th>Account Number</th>
-      <th>Balance</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Age</th>
-      <th>Gender</th>
-      <th>Address</th>
-      <th>Employer</th>
-      <th>Email</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let account of (accounts | async)">
-      <td>{{ account.accountNumber}}</td>
-      <td>{{ account.balance}}</td>
-      <td>{{ account.firstname}}</td>
-      <td>{{ account.lastname}}</td>
-      <td>{{ account.age}}</td>
-      <td>{{ account.gender}}</td>
-      <td>{{ account.address}}</td>
-      <td>{{ account.employer}}</td>
-      <td>{{ account.email}}</td>
-      <td>{{ account.city}}</td>
-      <td>{{ account.state}}</td>
-      <td>
-        <a [routerLink]="['/account/', account.id]" class="btn btn-primary  mb-3"> Detail</a>
-        <a [routerLink]="['/account/edit', account.id]" class="btn btn-primary  mb-3" *ngIf="isAdmin"> Edit</a>
-        <a [routerLink]="" (click)="delete(account.id)"class="btn btn-primary  mb-3" *ngIf="isAdmin"> Delete</a>
-      </td>
-    </tr>
-  </tbody>
-</table>

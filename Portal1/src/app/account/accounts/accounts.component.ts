@@ -12,8 +12,9 @@ import { AccountService } from 'src/app/shared/account.service';
 export class AccountsComponent implements OnInit {
 
   public accounts: Observable<AccountModel[]>;
-  postId: number;
   isAdmin : boolean = false;
+  p: number = 1;
+  searchKeyWord: '';
   constructor(private accountService: AccountService) {
 
   }

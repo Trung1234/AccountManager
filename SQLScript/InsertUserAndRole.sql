@@ -13,7 +13,7 @@ INSERT INTO [dbo].[AspNetRoles]
            ,[Name]
            ,[NormalizedName])
      VALUES
-           (2, 'Customer','Customer')
+           (2, 'Normal','Normal')
 GO
 
 

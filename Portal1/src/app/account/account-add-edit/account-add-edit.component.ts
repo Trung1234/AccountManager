@@ -27,7 +27,7 @@ export class AccountAddEditComponent implements OnInit {
   formBalance: string;
   formAge: string;
   formGender: string;
-
+  formState: string;
 
   constructor(private accountService: AccountService, private formBuilder: FormBuilder,
     private avRoute: ActivatedRoute, private router: Router) {
@@ -43,6 +43,7 @@ export class AccountAddEditComponent implements OnInit {
     this.formBalance = 'balance';
     this.formAge = 'age';
     this.formGender = 'gender';
+    this.formState = 'state';
     if (this.avRoute.snapshot.params[idParam]) {
       this.id = this.avRoute.snapshot.params[idParam];
     }
@@ -61,7 +62,8 @@ export class AccountAddEditComponent implements OnInit {
         employer: ['', Validators.required],
         firstname: ['', Validators.required],
         lastname: ['', Validators.required],
-        gender: ['', Validators.required]
+        gender: ['', Validators.required],
+        state: ['', Validators.required]
       }
     )
   }
@@ -82,7 +84,8 @@ export class AccountAddEditComponent implements OnInit {
           this.form.controls[this.formEmployer].setValue(this.existingAccount.employer),
           this.form.controls[this.formFirstname].setValue(this.existingAccount.firstname),
           this.form.controls[this.formLastname].setValue(this.existingAccount.lastname),
-          this.form.controls[this.formGender].setValue(this.existingAccount.gender)
+          this.form.controls[this.formGender].setValue(this.existingAccount.gender),
+          this.form.controls[this.formState].setValue(this.existingAccount.state)
       ));
     }
   }
@@ -103,8 +106,8 @@ export class AccountAddEditComponent implements OnInit {
         firstname: this.form.get(this.formFirstname).value,
         email: this.form.get(this.formEmail).value,
         address: this.form.get(this.formAddress).value,
-        lastname: '',
-        state: ''
+        lastname: this.form.get(this.formLastname).value,
+        state: this.form.get(this.formState).value
       };
 
       this.accountService.saveAccount(account)
@@ -115,17 +118,17 @@ export class AccountAddEditComponent implements OnInit {
     if (this.actionType === 'Edit') {
       let account: AccountModel = {
         id: this.existingAccount.id,
-        accountNumber: this.existingAccount.accountNumber,
+        accountNumber: this.form.get(this.formAccountNumber).value,
         gender: this.form.get(this.formGender).value,
         age: this.form.get(this.formAge).value,
-        balance: this.existingAccount.balance,
-        city: this.existingAccount.city,
-        employer: this.existingAccount.employer,
-        firstname: this.existingAccount.firstname,
-        lastname: this.existingAccount.lastname,
-        state: this.existingAccount.state,
+        balance: this.form.get(this.formBalance).value,
+        city: this.form.get(this.formEmployer).value,
+        employer: this.form.get(this.formEmployer).value,
+        firstname: this.form.get(this.formFirstname).value,
         email: this.form.get(this.formEmail).value,
-        address: this.form.get(this.formAddress).value
+        address: this.form.get(this.formAddress).value,
+        lastname: this.form.get(this.formLastname).value,
+        state: this.form.get(this.formState).value
       };
       this.accountService.updateAccount(account.id, account)
         .subscribe((data) => {
@@ -146,4 +149,6 @@ export class AccountAddEditComponent implements OnInit {
   get city() { return this.form.get(this.formCity); }
   get employer() { return this.form.get(this.formEmployer); }
   get balance() { return this.form.get(this.formBalance); }
+  get lastname() { return this.form.get(this.formLastname); }
+  get state() { return this.form.get(this.formState); }
 }

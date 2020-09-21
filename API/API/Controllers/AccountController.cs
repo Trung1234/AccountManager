@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using API.Models;
 using API.Repositories;
 using API.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -34,15 +35,15 @@ namespace API.Controllers
             }
         }
 
-        // GET: api/BlogPosts
         [HttpGet]
+        [Authorize(Roles = "Admin,Normal")]
         public IEnumerable<Account> GetAccounts()
         {
             return _repo.GetAll();
         }
 
- 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Normal")]
         public async Task<IActionResult> GetAccount([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -61,6 +62,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PostAccount([FromBody] Account account)
         {
             if (!ModelState.IsValid)
@@ -75,6 +77,7 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutAccount([FromRoute] int id, [FromBody] Account account)
         {
             if (!ModelState.IsValid)
@@ -99,6 +102,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteAccount([FromRoute] int id)
         {
             if (!ModelState.IsValid)

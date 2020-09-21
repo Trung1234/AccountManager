@@ -14,6 +14,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { AccountComponent } from './account/account/account.component';
 import { AccountAddEditComponent } from './account/account-add-edit/account-add-edit.component';
 import { AccountsComponent } from './account/accounts/accounts.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { AccountsComponent } from './account/accounts/accounts.component';
   ],
   imports: [
     BrowserModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
