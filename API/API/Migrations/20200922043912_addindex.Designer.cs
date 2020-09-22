@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(AccountManagerContext))]
-    [Migration("20200915014423_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200922043912_addindex")]
+    partial class addindex
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,6 +50,8 @@ namespace API.Migrations
                     b.Property<string>("State");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountNumber");
 
                     b.ToTable("Accounts");
                 });

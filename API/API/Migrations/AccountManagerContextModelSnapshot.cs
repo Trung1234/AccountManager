@@ -49,6 +49,8 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AccountNumber");
+
                     b.ToTable("Accounts");
                 });
 

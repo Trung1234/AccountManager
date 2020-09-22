@@ -20,6 +20,8 @@ namespace API.Models
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Account>().HasKey(c => new { c.Id});
+            modelBuilder.Entity<Account>()
+        .HasIndex(b => b.AccountNumber);
         }
     }
 }
