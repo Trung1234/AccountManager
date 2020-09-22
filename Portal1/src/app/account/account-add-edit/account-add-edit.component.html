@@ -2,116 +2,129 @@
 <app-header></app-header>
 
 <div class="container-fluid pt-3">
-  <h1>{{actionType}} account</h1>
-  <div class="col-3 ">
+
+  <div >
     <form [formGroup]="form" (ngSubmit)="save()" #formDir="ngForm" novalidate>
-      <div class="form-group row">
-        <label class=" control-label col-md-12">Account Number</label>
-        <div class="col-md-12" >
-          <input class="form-control" type="number" formControlName="accountNumber" >
+      <h1>{{actionType}} account</h1>
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label class=" control-label col-md-12">Account Number</label>
+          <div class="col-md-12" >
+            <input  class="form-control bg-light text-dark" type="number" formControlName="accountNumber" >
+          </div>
+          <span class="text-danger ml-3" *ngIf="accountNumber.invalid && formDir.submitted">
+            Account Number is required.
+          </span>
         </div>
-        <span class="text-danger ml-3" *ngIf="accountNumber.invalid && formDir.submitted">
-          Account Number is required.
-        </span>
+        <div class="form-group col-6">
+          <label class=" control-label col-md-12">Balance</label>
+          <div class="col-md-12">
+            <input class="form-control bg-light text-dark" type="text" formControlName="balance">
+          </div>
+          <span class="text-danger ml-3" *ngIf="balance.invalid && formDir.submitted">
+            Balance is required.
+          </span>
+        </div>
       </div>
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label class=" control-label col-md-12">Address</label>
+          <div class="col-md-12">
+            <input class="form-control bg-light text-dark" type="text" formControlName="address">
+          </div>
+          <span class="text-danger ml-3" *ngIf="address.invalid && formDir.submitted">
+            Address is required.
+          </span>
+        </div>
+        <div class="form-group col-6">
+          <label class=" control-label col-md-12">Ages</label>
+          <div class="col-md-12">
+            <input class="form-control bg-light text-dark" type="number" formControlName="age">
+          </div>
+          <span class="text-danger ml-3" *ngIf="age.invalid && formDir.submitted">
+            Age is required.
+          </span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label class=" control-label col-md-12">Email</label>
+          <div class="col-md-12">
+            <input class="form-control bg-light text-dark" type="email" formControlName="email">
+          </div>
+          <span class="text-danger ml-3" *ngIf="email.invalid && formDir.submitted">
+            Email is invalid
+          </span>
+        </div>
+        <div class="form-group col-6">
+          <label class=" control-label col-md-12">Gender</label>
+          <div class="col-md-12">
+            <p>
+              <input type="radio" value="M" formControlName="gender"> Male
+              <input type="radio" value="F" formControlName="gender"> Female
+           </p>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label class=" control-label col-md-12">City</label>
+          <div class="col-md-12">
+            <input class="form-control bg-light text-dark" type="text" formControlName="city">
+          </div>
+          <span class="text-danger ml-3" *ngIf="city.invalid && formDir.submitted">
+            City is required.
+          </span>
+        </div>
+        <div class="form-group col-6">
+          <label class=" control-label col-md-12">Employer</label>
+          <div class="col-md-12">
+            <input class="form-control bg-light text-dark" type="text" formControlName="employer">
+          </div>
+          <span class="text-danger ml-3" *ngIf="employer.invalid && formDir.submitted">
+            Employer is required.
+          </span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label class=" control-label col-md-12">First name</label>
+          <div class="col-md-12">
+            <input class="form-control bg-light text-dark" type="text" formControlName="firstname">
+          </div>
+          <span class="text-danger ml-3" *ngIf="firstname.invalid && formDir.submitted">
+            First name is required.
+          </span>
+        </div>
+        <div class="form-group col-6">
+          <label class=" control-label col-md-12">Last name</label>
+          <div class="col-md-12">
+            <input class="form-control bg-light text-dark" type="text" formControlName="lastname">
+          </div>
+          <span class="text-danger ml-3" *ngIf="lastname.invalid && formDir.submitted">
+            Last name is required.
+          </span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label class=" control-label col-md-12">State name</label>
+          <div class="col-md-12">
+            <input class="form-control bg-light text-dark" type="text" formControlName="state">
+          </div>
+          <span class="text-danger ml-3" *ngIf="state.invalid && formDir.submitted">
+            State is required.
+          </span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-6">
 
-      <div class="form-group row">
-        <label class=" control-label col-md-12">Balance</label>
-        <div class="col-md-12">
-          <input class="form-control" type="text" formControlName="balance">
         </div>
-        <span class="text-danger ml-3" *ngIf="balance.invalid && formDir.submitted">
-          Balance is required.
-        </span>
-      </div>
-
-      <div class="form-group row">
-        <label class=" control-label col-md-12">Address</label>
-        <div class="col-md-12">
-          <input class="form-control" type="text" formControlName="address">
+        <div class="form-group col-6">
+          <button type="submit" class="btn btn-success float-right ml-2">Save</button>
+          <button class="btn btn-secondary float-right ml-2" (click)="cancel()">Cancel</button>
         </div>
-        <span class="text-danger ml-3" *ngIf="address.invalid && formDir.submitted">
-          Address is required.
-        </span>
-      </div>
-      <div class="form-group row">
-        <label class=" control-label col-md-12">Ages</label>
-        <div class="col-md-12">
-          <input class="form-control" type="number" formControlName="age">
-        </div>
-        <span class="text-danger ml-3" *ngIf="age.invalid && formDir.submitted">
-          Age is required.
-        </span>
-      </div>
-      <div class="form-group row">
-        <label class=" control-label col-md-12">Email</label>
-        <div class="col-md-12">
-          <input class="form-control" type="email" formControlName="email">
-        </div>
-        <span class="text-danger ml-3" *ngIf="email.invalid && formDir.submitted">
-          Email is invalid
-        </span>
-      </div>
-      <div class="form-group row">
-        <label class=" control-label col-md-12">Email</label>
-        <div class="col-md-12">
-          <p>
-            <input type="radio" value="M" formControlName="gender"> Male
-            <input type="radio" value="F" formControlName="gender"> Female
-         </p>
-        </div>
-      </div>
-
-      <div class="form-group row">
-        <label class=" control-label col-md-12">City</label>
-        <div class="col-md-12">
-          <input class="form-control" type="text" formControlName="city">
-        </div>
-        <span class="text-danger ml-3" *ngIf="city.invalid && formDir.submitted">
-          City is required.
-        </span>
-      </div>
-
-      <div class="form-group row">
-        <label class=" control-label col-md-12">Employer</label>
-        <div class="col-md-12">
-          <input class="form-control" type="text" formControlName="employer">
-        </div>
-        <span class="text-danger ml-3" *ngIf="employer.invalid && formDir.submitted">
-          Employer is required.
-        </span>
-      </div>
-
-      <div class="form-group row">
-        <label class=" control-label col-md-12">First name</label>
-        <div class="col-md-12">
-          <input class="form-control" type="text" formControlName="firstname">
-        </div>
-        <span class="text-danger ml-3" *ngIf="firstname.invalid && formDir.submitted">
-          First name is required.
-        </span>
-      </div>
-      <div class="form-group row">
-        <label class=" control-label col-md-12">Last name</label>
-        <div class="col-md-12">
-          <input class="form-control" type="text" formControlName="lastname">
-        </div>
-        <span class="text-danger ml-3" *ngIf="lastname.invalid && formDir.submitted">
-          Last name is required.
-        </span>
-      </div>
-      <div class="form-group row">
-        <label class=" control-label col-md-12">State name</label>
-        <div class="col-md-12">
-          <input class="form-control" type="text" formControlName="state">
-        </div>
-        <span class="text-danger ml-3" *ngIf="state.invalid && formDir.submitted">
-          State is required.
-        </span>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-success float-right">Save</button>
-        <button class="btn btn-secondary float-left" (click)="cancel()">Cancel</button>
       </div>
     </form>
   </div>
