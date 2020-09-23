@@ -52,8 +52,11 @@ export class AccountsComponent implements OnInit {
       this.accounts = result.items;
     this.pageNumber = result.pageIndex;
     this.Count = result.count;
-    }, error => console.error(error));
-}
+    },
+    err => {
+      console.log(err);
+    },);
+  }
   delete(id) {
     const ans = confirm('Do you want to delete Account ');
     if (ans) {

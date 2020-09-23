@@ -53,9 +53,9 @@ export class AccountAddEditComponent implements OnInit {
         id: 0,
         accountNumber: ['',Validators.required],
         address: ['',Validators.required],
-        age: ['',Validators.required],
+        age: ['',[Validators.required, Validators.minLength(1)]],
         email: ['', [Validators.required, Validators.email]],
-        balance: ['', Validators.required],
+        balance: ['', [Validators.required, Validators.minLength(1)]],
 
         city: ['', Validators.required],
 
