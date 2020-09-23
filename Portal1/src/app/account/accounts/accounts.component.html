@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<p *ngIf="!(accounts | async)"><em>Loading...</em></p>
+
 <div class="container-fluid">
 
   <div class="form-group">
@@ -14,7 +14,7 @@
 <p>
   <a [routerLink]="['/account/add']" class="btn btn-primary float-left mb-3" *ngIf="isAdmin">New </a>
 </p>
-  <table class="table table-sm table-hover" *ngIf="(accounts | async)?.length>0">
+  <table class="table table-sm table-hover" >
     <thead>
       <tr>
         <th>Account Number</th>
@@ -32,7 +32,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let account of (accounts | async) | filter:searchKeyWord | paginate: { itemsPerPage: 10, currentPage: p };index as i;let odd=odd; let even=even;">
+      <tr *ngFor="let account of accounts | paginate: { itemsPerPage: 10, currentPage: pageNumber , totalItems:Count } | filter:searchKeyWord" >
         <td>{{ account.accountNumber}}</td>
         <td>{{ account.balance}}</td>
         <td>{{ account.firstname}}</td>
@@ -52,6 +52,6 @@
       </tr>
     </tbody>
   </table>
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
 </div>
 

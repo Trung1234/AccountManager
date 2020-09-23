@@ -4,11 +4,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { AccountModel } from '../models/account';
+import { PageResult } from '../models/pageResult';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
+
 
   myAppUrl: string;
   myApiUrl: string;
@@ -29,7 +31,12 @@ export class AccountService {
       catchError(this.errorHandler)
     );
   }
-
+  getAccountPagings(): Observable<PageResult<AccountModel>> {
+    return this.http.get<PageResult<AccountModel>>(this.myAppUrl + this.myApiUrl+'GetAccounts');
+  }
+  getAccountsByPape(pageNumber: any) : Observable<PageResult<AccountModel>> {
+    return this.http.get<PageResult<AccountModel>>(this.myAppUrl + this.myApiUrl+'GetAccounts?page=' + pageNumber)
+  }
   getAccount(id: number): Observable<AccountModel> {
       return this.http.get<AccountModel>(this.myAppUrl + this.myApiUrl + id)
       .pipe(

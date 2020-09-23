@@ -42,6 +42,23 @@ namespace API.Controllers
             return _repo.GetAll();
         }
 
+        [HttpGet]
+        [Route("GetAccounts")]
+        [Authorize(Roles = "Admin,Normal")]
+        public PageResult<Account> GetAccountPagings(int? page, int pagesize = 10)
+        {
+            IEnumerable<Account> accounts = _repo.GetAll();
+            var countDetails = accounts.Count();
+            var result = new PageResult<Account>
+            {
+                Count = countDetails,
+                PageIndex = page ?? 1,
+                PageSize = 10,
+                Items = accounts.Skip((page - 1 ?? 0) * pagesize).Take(pagesize).ToList()
+            };
+            return result;
+        }
+
         [HttpGet("{id}")]
         [Authorize(Roles = "Admin,Normal")]
         public async Task<IActionResult> GetAccount([FromRoute] int id)

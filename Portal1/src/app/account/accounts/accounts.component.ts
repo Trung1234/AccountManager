@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AccountModel } from 'src/app/models/account';
+import { PageResult } from 'src/app/models/pageResult';
 import { AccountService } from 'src/app/shared/account.service';
 
 @Component({
@@ -11,10 +12,15 @@ import { AccountService } from 'src/app/shared/account.service';
 })
 export class AccountsComponent implements OnInit {
 
-  public accounts: Observable<AccountModel[]>;
+  public accounts: AccountModel[];
+  public accountPagings: Observable<PageResult<AccountModel>>;
+  listAccount: AccountModel[];
   isAdmin : boolean = false;
   p: number = 1;
   searchKeyWord: '';
+  public pageNumber: number = 1;
+  public Count: number;
+
   constructor(private accountService: AccountService) {
 
   }
@@ -25,18 +31,34 @@ export class AccountsComponent implements OnInit {
     if(userRole === "Admin"){
         this.isAdmin = true;
     }
-    this.loadAccounts();
+    this.loadAccountPagings();
   }
 
-  loadAccounts() {
-    this.accounts = this.accountService.getAccounts();
-  }
 
+  loadAccountPagings() {
+    this.accountService.getAccountPagings().subscribe(
+      result => {
+        this.accounts = result.items;
+      this.pageNumber = result.pageIndex;
+      this.Count = result.count;
+      },
+      err => {
+        console.log(err);
+      },
+    );
+  }
+  public onPageChange = (pageNumber) => {
+    this.accountService.getAccountsByPape(pageNumber).subscribe(result => {
+      this.accounts = result.items;
+    this.pageNumber = result.pageIndex;
+    this.Count = result.count;
+    }, error => console.error(error));
+}
   delete(id) {
     const ans = confirm('Do you want to delete Account ');
     if (ans) {
       this.accountService.deleteAccount(id).subscribe((data) => {
-        this.loadAccounts();
+        this.loadAccountPagings();
       });
     }
   }
