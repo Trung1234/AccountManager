@@ -1,4 +1,8 @@
 @import "~bootstrap/dist/css/bootstrap.css";
+
+@import '~ngx-toastr/toastr';
+
+
 body{
   background-color: white;
 }
