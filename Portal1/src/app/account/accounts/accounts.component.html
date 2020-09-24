@@ -13,6 +13,7 @@
 <p></p>
 <p>
   <a [routerLink]="['/account/add']" class="btn btn-primary float-left mb-3 ml-2" *ngIf="isAdmin">New </a>
+  <button type="button" class="btn btn-primary ml-2" (click)="openPopUp()">Open to search</button>
 </p>
   <table class="table table-sm table-hover" >
     <thead>
@@ -32,7 +33,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let account of accounts | paginate: { itemsPerPage: 10, currentPage: pageNumber , totalItems:Count } | filter:searchKeyWord" >
+      <tr *ngFor="let account of accounts | paginate: { itemsPerPage: 10, currentPage: pageNumber , totalItems: count } | filter:searchKeyWord" >
         <td>{{ account.accountNumber}}</td>
         <td>{{ account.balance}}</td>
         <td>{{ account.firstname}}</td>
@@ -55,3 +56,11 @@
   <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
 </div>
 
+<ng-template #mymodal let-modal>
+  <div class="modal-body">
+    <app-search-account></app-search-account>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+  </div>
+</ng-template>

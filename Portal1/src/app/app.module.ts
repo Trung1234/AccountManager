@@ -16,6 +16,8 @@ import { AccountAddEditComponent } from './account/account-add-edit/account-add-
 import { AccountsComponent } from './account/accounts/accounts.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {NgbModule,NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
+import { SearchAccountComponent } from './account/search-account/search-account.component';
 
 @NgModule({
   declarations: [
@@ -25,9 +27,12 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     HeaderComponent,
     AccountComponent,
     AccountAddEditComponent,
-    AccountsComponent
+    AccountsComponent,
+    SearchAccountComponent
   ],
   imports: [
+    NgbModule,
+    NgbAlertModule,
     BrowserModule,
     Ng2SearchPipeModule,
     NgxPaginationModule,

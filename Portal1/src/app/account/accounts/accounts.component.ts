@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { AccountModel } from 'src/app/models/account';
 import { PageResult } from 'src/app/models/pageResult';
 import { AccountService } from 'src/app/shared/account.service';
+import { SearchAccountComponent } from '../search-account/search-account.component';
 
 @Component({
   selector: 'app-accounts',
@@ -19,9 +21,9 @@ export class AccountsComponent implements OnInit {
   p: number = 1;
   searchKeyWord: '';
   public pageNumber: number = 1;
-  public Count: number;
+  public count: number;
 
-  constructor(private accountService: AccountService) {
+  constructor(private accountService: AccountService,private modalService: NgbModal) {
 
   }
 
@@ -40,7 +42,7 @@ export class AccountsComponent implements OnInit {
       result => {
         this.accounts = result.items;
       this.pageNumber = result.pageIndex;
-      this.Count = result.count;
+      this.count = result.count;
       },
       err => {
         console.log(err);
@@ -51,11 +53,14 @@ export class AccountsComponent implements OnInit {
     this.accountService.getAccountsByPape(pageNumber).subscribe(result => {
       this.accounts = result.items;
     this.pageNumber = result.pageIndex;
-    this.Count = result.count;
+    this.count = result.count;
     },
     err => {
       console.log(err);
     },);
+  }
+  openPopUp(){
+    this.modalService.open(SearchAccountComponent);
   }
   delete(id) {
     const ans = confirm('Do you want to delete Account ');
