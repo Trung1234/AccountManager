@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace API.ViewModel
 {
-    public class AccountImportVM
+    public class AccountImport
     {
         public int account_number { get; set; }
         public int balance { get; set; }

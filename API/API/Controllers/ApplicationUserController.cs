@@ -35,7 +35,7 @@ namespace API.Controllers
         [HttpPost]
         [Route("Register")]
         //POST : /api/ApplicationUser/Register
-        public async Task<Object> PostApplicationUser(ApplicationUserViewModel model)
+        public async Task<Object> PostApplicationUser(ApplicationUserModel model)
         {
             model.Role = "Normal";
             var applicationUser = new ApplicationUser()

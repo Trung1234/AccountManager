@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(AccountManagerContext))]
-    [Migration("20200922043912_addindex")]
-    partial class addindex
+    [Migration("20200925030832_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,25 +29,33 @@ namespace API.Migrations
 
                     b.Property<int>("AccountNumber");
 
-                    b.Property<string>("Address");
+                    b.Property<string>("Address")
+                        .IsRequired();
 
                     b.Property<int>("Age");
 
                     b.Property<int>("Balance");
 
-                    b.Property<string>("City");
+                    b.Property<string>("City")
+                        .IsRequired();
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired();
 
-                    b.Property<string>("Employer");
+                    b.Property<string>("Employer")
+                        .IsRequired();
 
-                    b.Property<string>("Firstname");
+                    b.Property<string>("Firstname")
+                        .IsRequired();
 
-                    b.Property<string>("Gender");
+                    b.Property<string>("Gender")
+                        .IsRequired();
 
-                    b.Property<string>("Lastname");
+                    b.Property<string>("Lastname")
+                        .IsRequired();
 
-                    b.Property<string>("State");
+                    b.Property<string>("State")
+                        .IsRequired();
 
                     b.HasKey("Id");
 

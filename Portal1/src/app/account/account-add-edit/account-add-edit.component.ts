@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AccountModel } from 'src/app/models/account';
 import { AccountService } from 'src/app/shared/account.service';
 
+
 @Component({
   selector: 'app-account-add-edit',
   templateUrl: './account-add-edit.component.html',
@@ -28,7 +29,7 @@ export class AccountAddEditComponent implements OnInit {
   formAge: string;
   formGender: string;
   formState: string;
-
+  errors: string[];
   constructor(private accountService: AccountService, private formBuilder: FormBuilder,
     private avRoute: ActivatedRoute, private router: Router) {
     const idParam = 'id';
@@ -44,6 +45,7 @@ export class AccountAddEditComponent implements OnInit {
     this.formAge = 'age';
     this.formGender = 'gender';
     this.formState = 'state';
+
     if (this.avRoute.snapshot.params[idParam]) {
       this.id = this.avRoute.snapshot.params[idParam];
     }
@@ -56,9 +58,7 @@ export class AccountAddEditComponent implements OnInit {
         age: ['',[Validators.required, Validators.minLength(1)]],
         email: ['', [Validators.required, Validators.email]],
         balance: ['', [Validators.required, Validators.minLength(1)]],
-
         city: ['', Validators.required],
-
         employer: ['', Validators.required],
         firstname: ['', Validators.required],
         lastname: ['', Validators.required],
@@ -69,6 +69,7 @@ export class AccountAddEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.errors = [];
     if (this.id > 0) {
       this.actionType = 'Edit';
       this.isAdd = false;
@@ -111,9 +112,22 @@ export class AccountAddEditComponent implements OnInit {
       };
 
       this.accountService.saveAccount(account)
-        .subscribe((data) => {
+      .subscribe(
+        (data: any) => {
           this.router.navigate(['/account', data.id]);
-        });
+        },
+        err => {
+          this.errors = [];
+          console.log(err);
+            if (err.status === 400) {
+              // handle validation error
+              console.log(err);
+              this.errors.push(err.error.message);
+            } else {
+              this.errors.push("something went wrong!");
+            }
+        }
+      );
     }
     if (this.actionType === 'Edit') {
       let account: AccountModel = {

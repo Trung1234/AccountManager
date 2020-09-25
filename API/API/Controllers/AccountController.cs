@@ -26,11 +26,11 @@ namespace API.Controllers
             _repo = repo;
             _hostingEnvironment = hostingEnvironment;
             currentPath = _hostingEnvironment.ContentRootPath + "\\Data\\accounts.json";
-            // Kiểm tra nếu chưa tồn tại file json
+            // Check if file json is not existed
             if (!System.IO.File.Exists(currentPath))
             {
                 System.IO.File.Create(currentPath).Close();
-                var newContent = new List<AccountImportVM>();
+                var newContent = new List<AccountImport>();
                 System.IO.File.WriteAllText(currentPath, JsonConvert.SerializeObject(newContent, Formatting.Indented));
             }
         }
@@ -80,15 +80,22 @@ namespace API.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> PostAccount([FromBody] Account account)
+        public IActionResult PostAccount([FromBody] Account account)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
+            if (_repo.IsEmailDuplicated(account.Email, account))
+            {
+                return BadRequest(new { message = "This email already exists" });
+            }
+            if (_repo.IsExist(account.AccountNumber))
+            {
+                return BadRequest(new { message = "This Account Number already exists" });
+            }
             _repo.Add(account);
-            var save = await _repo.SaveAsync(account);
+            _repo.SaveChange(account);
 
             return CreatedAtAction("GetAccount", new { id = account.Id }, account);
         }
@@ -106,10 +113,20 @@ namespace API.Controllers
             {
                 return BadRequest();
             }
+            if (_repo.IsEmailDuplicated(account.Email, account))
+            {
+                ModelState.AddModelError("Email", "This email already exists");
+                return BadRequest(ModelState);
+            }
+            if (_repo.IsExist(account.AccountNumber))
+            {
+                ModelState.AddModelError("AccountNumber", "This Account Number already exists");
+                return BadRequest(ModelState);
+            }
             try
             {
                 _repo.Update(account);
-                var save = await _repo.SaveAsync(account);
+                await _repo.SaveAsync(account);
             }
             catch (Exception ex)
             {
@@ -122,17 +139,11 @@ namespace API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteAccount([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var account = await _repo.GetById(id);
             if (account == null)
             {
                 return NotFound();
             }
-
             _repo.Delete(account);
             await _repo.SaveAsync(account);
 
@@ -146,8 +157,8 @@ namespace API.Controllers
             try
             {
                 var json = System.IO.File.ReadAllText(currentPath);
-                var accountVMs = JsonConvert.DeserializeObject<List<AccountImportVM>>(json);
-                if (accountVMs == null) accountVMs = new List<AccountImportVM>();
+                var accountVMs = JsonConvert.DeserializeObject<List<AccountImport>>(json);
+                if (accountVMs == null) accountVMs = new List<AccountImport>();
                 _repo.ImportAccounts(accountVMs);               
             }
             catch (Exception ex)

@@ -11,7 +11,9 @@ namespace API.Repositories
     {
         IEnumerable<Account> GetAll();
         Task<Account> GetById(int id);
-        bool IsExist(int id);
-        void ImportAccounts(List<AccountImportVM> accounts);
+        bool IsExist(int accountNumber);
+        bool IsEmailDuplicated(string emailAddress, Account account);
+        void ImportAccounts(List<AccountImport> accounts);
+        Account SaveChange(Account entity);
     }
 }

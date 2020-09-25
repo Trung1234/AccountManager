@@ -46,11 +46,7 @@ export class AccountService {
   }
 
   saveAccount(Account): Observable<AccountModel> {
-      return this.http.post<AccountModel>(this.myAppUrl + this.myApiUrl, JSON.stringify(Account), this.httpOptions)
-      .pipe(
-        retry(1),
-        catchError(this.errorHandler)
-      );
+      return this.http.post<AccountModel>(this.myAppUrl + this.myApiUrl, JSON.stringify(Account), this.httpOptions);
   }
 
   updateAccount(postId: number, Account): Observable<AccountModel> {

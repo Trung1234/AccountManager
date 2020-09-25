@@ -42,7 +42,7 @@ namespace API.Repositories
             return await _context.Accounts.FindAsync(id);
         }
 
-        public void ImportAccounts(List<AccountImportVM> accountVMs)
+        public void ImportAccounts(List<AccountImport> accountVMs)
         {
             foreach (var accountVM in accountVMs)
             {
@@ -65,11 +65,18 @@ namespace API.Repositories
             }
         }
 
-        public bool IsExist(int id)
+        public bool IsExist(int accountNumber)
         {
-            return _context.Accounts.Any(e => e.Id == id);
+            return _context.Accounts.Any(e => e.AccountNumber == accountNumber);
         }
-
+        public bool IsEmailDuplicated(string emailAddress,Account account = null)
+        {
+            if(account.Id > 0 && account.Email.Equals(emailAddress.Trim()))
+            {
+                return false;
+            }
+            return _context.Accounts.Any(e => e.Email.Equals(emailAddress.Trim()));
+        }
         public async Task<Account> SaveAsync(Account account)
         {
             await _context.SaveChangesAsync();
@@ -80,6 +87,12 @@ namespace API.Repositories
         {
             _context.Entry(account).State = EntityState.Modified;
             _context.Update(account);
+        }
+
+        public Account SaveChange(Account account)
+        {
+            _context.SaveChanges();
+            return account;
         }
     }
 }
