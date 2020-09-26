@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AccountModel } from 'src/app/models/account';
 import { AccountService } from 'src/app/shared/account.service';
 
@@ -31,8 +32,8 @@ export class SearchAccountComponent implements OnInit {
   formState: string;
 
 
-  constructor(private accountService: AccountService, private formBuilder: FormBuilder,
-    private avRoute: ActivatedRoute, private router: Router) {
+  constructor(private accountService: AccountService, private formBuilder: FormBuilder,private modalService: NgbModal
+    ,private avRoute: ActivatedRoute, private router: Router) {
 
 
     this.formAccountNumber = 'accountNumber';
@@ -69,6 +70,11 @@ export class SearchAccountComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  closePopUp(){
+    this.modalService.dismissAll(SearchAccountComponent);
+  }
+
   save() {
     let account: AccountModel = {
       id: 0,
@@ -89,6 +95,7 @@ export class SearchAccountComponent implements OnInit {
         (data: any) => {
           console.log(data);
           this.accountService.sendSharedListItem(data);
+          this.closePopUp();
           this.router.navigate(['/accounts']);
         },
         err => {
@@ -97,9 +104,7 @@ export class SearchAccountComponent implements OnInit {
         }
       );
   }
-  cancel() {
-    this.router.navigate(['/accounts']);
-  }
+
   get accountNumber() { return this.form.get(this.formAccountNumber); }
   get address() { return this.form.get(this.formAddress); }
   get age() { return this.form.get(this.formAge); }

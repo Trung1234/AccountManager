@@ -37,9 +37,10 @@ export class AccountsComponent implements OnInit {
     this.accountService.getSharedListItem().subscribe(data => {
       this.accounts = data as AccountModel[]
   });
-    if(this.accounts){
+    if(this.accounts == null){
       this.loadAccountPagings();
     }else{
+      this.modalService.dismissAll(SearchAccountComponent);
       this.pageNumber = 1;
       this.count = 1;
     }
