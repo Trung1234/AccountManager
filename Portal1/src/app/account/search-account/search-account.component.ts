@@ -30,6 +30,7 @@ export class SearchAccountComponent implements OnInit {
   formGender: string;
   formState: string;
 
+
   constructor(private accountService: AccountService, private formBuilder: FormBuilder,
     private avRoute: ActivatedRoute, private router: Router) {
 
@@ -69,7 +70,32 @@ export class SearchAccountComponent implements OnInit {
   ngOnInit() {
   }
   save() {
+    let account: AccountModel = {
+      id: 0,
+      accountNumber: this.form.get(this.formAccountNumber).value,
+      gender: this.form.get(this.formGender).value,
+      age: this.form.get(this.formAge).value,
+      balance: this.form.get(this.formBalance).value,
+      city: this.form.get(this.formEmployer).value,
+      employer: this.form.get(this.formEmployer).value,
+      firstname: this.form.get(this.formFirstname).value,
+      email: this.form.get(this.formEmail).value,
+      address: this.form.get(this.formAddress).value,
+      lastname: this.form.get(this.formLastname).value,
+      state: this.form.get(this.formState).value
+    };
+    this.accountService.searchAccount(account)
+      .subscribe(
+        (data: any) => {
+          console.log(data);
+          this.accountService.sendSharedListItem(data);
+          this.router.navigate(['/accounts']);
+        },
+        err => {
+          console.log(err);
 
+        }
+      );
   }
   cancel() {
     this.router.navigate(['/accounts']);

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
+import { of } from 'rxjs/internal/observable/of';
 import { AccountModel } from 'src/app/models/account';
 import { PageResult } from 'src/app/models/pageResult';
 import { AccountService } from 'src/app/shared/account.service';
@@ -33,9 +34,20 @@ export class AccountsComponent implements OnInit {
     if(userRole === "Admin"){
         this.isAdmin = true;
     }
-    this.loadAccountPagings();
-  }
+    this.accountService.getSharedListItem().subscribe(data => {
+      this.accounts = data as AccountModel[]
+  });
+    if(this.accounts){
+      this.loadAccountPagings();
+    }else{
+      this.pageNumber = 1;
+      this.count = 1;
+    }
 
+  }
+  convert<T>(array: Array<T>): Observable<Array<T>> {
+    return of(array);
+  }
 
   loadAccountPagings() {
     this.accountService.getAccountPagings().subscribe(

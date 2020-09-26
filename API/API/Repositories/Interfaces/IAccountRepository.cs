@@ -15,5 +15,6 @@ namespace API.Repositories
         bool IsEmailDuplicated(string emailAddress, Account account);
         void ImportAccounts(List<AccountImport> accounts);
         Account SaveChange(Account entity);
+        List<Account> Search(Account account);
     }
 }

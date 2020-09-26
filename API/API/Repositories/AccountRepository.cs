@@ -94,5 +94,14 @@ namespace API.Repositories
             _context.SaveChanges();
             return account;
         }
+
+        public List<Account> Search(Account account)
+        {
+            IEnumerable<Account> accounts = GetAll();
+            return accounts.Where(s => s.Email.Contains(account.Email) 
+            && s.Age == account.Age && s.State.Equals(account.State)
+            && s.Gender.Equals(account.Gender)
+            && s.Lastname.Contains(account.Lastname)).ToList();
+        }
     }
 }

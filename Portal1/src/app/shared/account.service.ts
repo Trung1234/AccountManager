@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { AccountModel } from '../models/account';
 import { PageResult } from '../models/pageResult';
@@ -10,8 +10,7 @@ import { PageResult } from '../models/pageResult';
   providedIn: 'root'
 })
 export class AccountService {
-
-
+  private shareListItem:BehaviorSubject<AccountModel[]>  = new BehaviorSubject<AccountModel[]>(null);
   myAppUrl: string;
   myApiUrl: string;
   httpOptions = {
@@ -24,6 +23,15 @@ export class AccountService {
       this.myApiUrl = 'Account/';
   }
 
+  public sendSharedListItem(list: AccountModel[]) {
+
+    this.shareListItem.next(list);
+  }
+
+  getSharedListItem(): Observable<AccountModel[]> {
+    return this.shareListItem.asObservable();
+  }
+
   getAccounts(): Observable<AccountModel[]> {
     return this.http.get<AccountModel[]>(this.myAppUrl + this.myApiUrl)
     .pipe(
@@ -31,6 +39,14 @@ export class AccountService {
       catchError(this.errorHandler)
     );
   }
+
+
+
+  searchAccount(account: AccountModel): Observable<PageResult<AccountModel>> {
+    return this.http.post<PageResult<AccountModel>>(this.myAppUrl + this.myApiUrl+
+      'SearchAccounts',JSON.stringify(account), this.httpOptions);
+  }
+
   getAccountPagings(): Observable<PageResult<AccountModel>> {
     return this.http.get<PageResult<AccountModel>>(this.myAppUrl + this.myApiUrl+'GetAccounts');
   }

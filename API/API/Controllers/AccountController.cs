@@ -59,6 +59,18 @@ namespace API.Controllers
             return result;
         }
 
+        [HttpPost]
+        [Route("SearchAccounts")]
+        public IActionResult SearchAccounts([FromBody] Account account)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            List<Account> accounts = _repo.Search(account);
+            return Ok(accounts);
+        }
+
         [HttpGet("{id}")]
         [Authorize(Roles = "Admin,Normal")]
         public async Task<IActionResult> GetAccount([FromRoute] int id)
@@ -77,7 +89,7 @@ namespace API.Controllers
 
             return Ok(account);
         }
-
+        
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public IActionResult PostAccount([FromBody] Account account)
