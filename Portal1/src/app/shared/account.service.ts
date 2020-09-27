@@ -23,8 +23,8 @@ export class AccountService {
       this.myApiUrl = 'Account/';
   }
 
-  public sendSharedListItem(list: AccountModel[]) {
 
+  public sendSharedListItem(list: AccountModel[]) {
     this.shareListItem.next(list);
   }
 

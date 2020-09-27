@@ -39,7 +39,10 @@
         <td>{{ account.firstname}}</td>
         <td>{{ account.lastname}}</td>
         <td>{{ account.age}}</td>
-        <td>{{ account.gender}}</td>
+        <td>
+          <div *ngIf="account.gender === 'F';else content">Female</div>
+          <ng-template #content>Male</ng-template>
+        </td>
         <td>{{ account.address}}</td>
         <td>{{ account.employer}}</td>
         <td>{{ account.email}}</td>

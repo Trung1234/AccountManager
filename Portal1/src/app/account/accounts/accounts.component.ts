@@ -34,9 +34,10 @@ export class AccountsComponent implements OnInit {
     if(userRole === "Admin"){
         this.isAdmin = true;
     }
+
     this.accountService.getSharedListItem().subscribe(data => {
       this.accounts = data as AccountModel[]
-  });
+    });
     if(this.accounts == null){
       this.loadAccountPagings();
     }else{
@@ -44,14 +45,14 @@ export class AccountsComponent implements OnInit {
       this.pageNumber = 1;
       this.count = 1;
     }
+  }
 
-  }
-  convert<T>(array: Array<T>): Observable<Array<T>> {
-    return of(array);
-  }
 
   loadAccountPagings() {
-    this.accountService.getAccountPagings().subscribe(
+    if(localStorage.getItem('pageNumber') != null){
+      this.pageNumber = +localStorage.getItem('pageNumber');
+    }
+    this.accountService.getAccountsByPape(this.pageNumber).subscribe(
       result => {
         this.accounts = result.items;
       this.pageNumber = result.pageIndex;
@@ -63,10 +64,11 @@ export class AccountsComponent implements OnInit {
     );
   }
   public onPageChange = (pageNumber) => {
+    localStorage.setItem('pageNumber', pageNumber);
     this.accountService.getAccountsByPape(pageNumber).subscribe(result => {
       this.accounts = result.items;
-    this.pageNumber = result.pageIndex;
-    this.count = result.count;
+      this.pageNumber = result.pageIndex;
+      this.count = result.count;
     },
     err => {
       console.log(err);
@@ -79,7 +81,14 @@ export class AccountsComponent implements OnInit {
     const ans = confirm('Do you want to delete Account ');
     if (ans) {
       this.accountService.deleteAccount(id).subscribe((data) => {
-        this.loadAccountPagings();
+        this.accountService.getAccountsByPape(this.pageNumber).subscribe(result => {
+          this.accounts = result.items;
+          this.pageNumber = result.pageIndex;
+          this.count = result.count;
+        },
+        err => {
+          console.log(err);
+        },);
       });
     }
   }

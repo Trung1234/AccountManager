@@ -14,7 +14,6 @@ export class AccountAddEditComponent implements OnInit {
   form: FormGroup;
   actionType: string;
   isAdd:  boolean = true;
-
   id: number;
   errorMessage: any;
   existingAccount: AccountModel;
@@ -30,6 +29,7 @@ export class AccountAddEditComponent implements OnInit {
   formGender: string;
   formState: string;
   errors: string[];
+  page: number = 1;
   constructor(private accountService: AccountService, private formBuilder: FormBuilder,
     private avRoute: ActivatedRoute, private router: Router) {
     const idParam = 'id';
@@ -73,6 +73,7 @@ export class AccountAddEditComponent implements OnInit {
     if (this.id > 0) {
       this.actionType = 'Edit';
       this.isAdd = false;
+
       this.accountService.getAccount(this.id)
       .subscribe(data => (
           this.existingAccount = data,
@@ -114,7 +115,7 @@ export class AccountAddEditComponent implements OnInit {
       this.accountService.saveAccount(account)
       .subscribe(
         (data: any) => {
-          this.router.navigate(['/account', data.id]);
+          this.router.navigate(['/accounts']);
         },
         err => {
           this.errors = [];
@@ -146,7 +147,7 @@ export class AccountAddEditComponent implements OnInit {
       };
       this.accountService.updateAccount(account.id, account)
         .subscribe((data) => {
-          this.router.navigate(['/account', data.id]);
+           this.router.navigate(['/accounts']);
         });
     }
   }

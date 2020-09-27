@@ -98,9 +98,15 @@ namespace API.Repositories
         public List<Account> Search(Account account)
         {
             IEnumerable<Account> accounts = GetAll();
-            return accounts.Where(s => s.Email.Contains(account.Email) 
-            && s.Age == account.Age && s.State.Equals(account.State)
+            return accounts.Where(s => 
+            s.AccountNumber == account.AccountNumber
+            && s.Email.Contains(account.Email) 
+            && s.Age == account.Age
+            && s.State.Contains(account.State)
             && s.Gender.Equals(account.Gender)
+            && s.Balance == account.Balance
+            && s.City.Contains(s.City)
+            && s.Firstname.Contains(s.Firstname)
             && s.Lastname.Contains(account.Lastname)).ToList();
         }
     }

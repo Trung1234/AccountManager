@@ -108,8 +108,7 @@ namespace API.Controllers
             }
             _repo.Add(account);
             _repo.SaveChange(account);
-
-            return CreatedAtAction("GetAccount", new { id = account.Id }, account);
+            return Ok(account);
         }
 
         [HttpPut("{id}")]
@@ -130,11 +129,7 @@ namespace API.Controllers
                 ModelState.AddModelError("Email", "This email already exists");
                 return BadRequest(ModelState);
             }
-            if (_repo.IsExist(account.AccountNumber))
-            {
-                ModelState.AddModelError("AccountNumber", "This Account Number already exists");
-                return BadRequest(ModelState);
-            }
+            
             try
             {
                 _repo.Update(account);
@@ -144,7 +139,7 @@ namespace API.Controllers
             {
                 return BadRequest();
             }
-            return CreatedAtAction("GetAccount", new { id = account.Id }, account);
+            return Ok(account);
         }
 
         [HttpDelete("{id}")]
