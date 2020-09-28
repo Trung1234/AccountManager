@@ -45,16 +45,19 @@ namespace API.Controllers
         [HttpGet]
         [Route("GetAccounts")]
         [Authorize(Roles = "Admin,Normal")]
-        public PageResult<Account> GetAccountPagings(int? page, int pagesize = 10)
+        public PageResult<Account> GetAccountPagings(int? page, int sortColumn, int pagesize = 10)
         {
             IEnumerable<Account> accounts = _repo.GetAll();
+            var accountsByPage = accounts.Skip((page - 1 ?? 0) * pagesize).Take(pagesize).ToList();
+            if (sortColumn != 0)
+                accountsByPage = _repo.SortByColumn(accountsByPage, sortColumn);
             var countDetails = accounts.Count();
             var result = new PageResult<Account>
             {
                 Count = countDetails,
                 PageIndex = page ?? 1,
                 PageSize = 10,
-                Items = accounts.Skip((page - 1 ?? 0) * pagesize).Take(pagesize).ToList()
+                Items = accountsByPage
             };
             return result;
         }

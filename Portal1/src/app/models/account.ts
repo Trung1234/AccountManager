@@ -13,3 +13,17 @@ export class AccountModel{
   city: string;
   state: string;
 }
+export enum Accounts
+{
+  AccountNumber,
+  Balance,
+  Firstname,
+  Lastname,
+  Age,
+  Address,
+  Employer,
+  Email,
+  City,
+  State,
+}
+

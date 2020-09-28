@@ -53,6 +53,10 @@ export class AccountService {
   getAccountsByPape(pageNumber: any) : Observable<PageResult<AccountModel>> {
     return this.http.get<PageResult<AccountModel>>(this.myAppUrl + this.myApiUrl+'GetAccounts?page=' + pageNumber)
   }
+  getAccountsSortted(pageNumber: any, column: any) : Observable<PageResult<AccountModel>> {
+    return this.http.get<PageResult<AccountModel>>(this.myAppUrl + this.myApiUrl+'GetAccounts?page=' + pageNumber+'&sortColumn='+column)
+  }
+
   getAccount(id: number): Observable<AccountModel> {
       return this.http.get<AccountModel>(this.myAppUrl + this.myApiUrl + id)
       .pipe(

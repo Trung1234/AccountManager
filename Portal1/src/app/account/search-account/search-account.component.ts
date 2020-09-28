@@ -75,7 +75,7 @@ export class SearchAccountComponent implements OnInit {
     this.modalService.dismissAll(SearchAccountComponent);
   }
 
-  save() {
+  search() {
     let account: AccountModel = {
       id: 0,
       accountNumber: this.form.get(this.formAccountNumber).value,

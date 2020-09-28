@@ -16,5 +16,6 @@ namespace API.Repositories
         void ImportAccounts(List<AccountImport> accounts);
         Account SaveChange(Account entity);
         List<Account> Search(Account account);
+        List<Account> SortByColumn(List<Account> accounts,int sortColumn);
     }
 }

@@ -77,6 +77,21 @@ export class AccountsComponent implements OnInit {
   openPopUp(){
     this.modalService.open(SearchAccountComponent);
   }
+  sortBy(sortColumn: any){
+    if(localStorage.getItem('pageNumber') != null){
+      this.pageNumber = +localStorage.getItem('pageNumber');
+    }
+    this.accountService.getAccountsSortted(this.pageNumber,sortColumn).subscribe(
+      result => {
+        this.accounts = result.items;
+      this.pageNumber = result.pageIndex;
+      this.count = result.count;
+      },
+      err => {
+        console.log(err);
+      },
+    );
+  }
   delete(id) {
     const ans = confirm('Do you want to delete Account ');
     if (ans) {

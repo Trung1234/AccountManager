@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static API.Common.Constant;
 
 namespace API.Repositories
 {
@@ -108,6 +109,39 @@ namespace API.Repositories
             && s.City.Contains(s.City)
             && s.Firstname.Contains(s.Firstname)
             && s.Lastname.Contains(account.Lastname)).ToList();
+        }
+
+        public List<Account> SortByColumn(List<Account> accounts,int sortColumn)
+        {
+            List<Account> result = new List<Account>();
+            switch (sortColumn)
+            {
+                case (int)Accounts.AccountNumber:
+                    result = accounts.OrderBy(s => s.AccountNumber).ToList();
+                    break;
+                case (int)Accounts.Balance:
+                    result = accounts.OrderBy(s => s.Balance).ToList();
+                    break;
+                case (int)Accounts.Firstname:
+                    result = accounts.OrderBy(s => s.Firstname).ToList();
+                    break;
+                case (int)Accounts.Lastname:
+                    result = accounts.OrderBy(s => s.Lastname).ToList();
+                    break;
+                case (int)Accounts.Age:
+                    result = accounts.OrderBy(s => s.Age).ToList();
+                    break;
+                case (int)Accounts.Employer:
+                    result = accounts.OrderBy(s => s.Employer).ToList();
+                    break;
+                case (int)Accounts.City:
+                    result = accounts.OrderBy(s => s.City).ToList();
+                    break;
+                case (int)Accounts.State:
+                    result = accounts.OrderBy(s => s.State).ToList();
+                    break;
+            }
+            return result;
         }
     }
 }
