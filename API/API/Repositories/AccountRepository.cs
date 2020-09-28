@@ -111,36 +111,70 @@ namespace API.Repositories
             && s.Lastname.Contains(account.Lastname)).ToList();
         }
 
-        public List<Account> SortByColumn(List<Account> accounts,int sortColumn)
+        public List<Account> SortByColumn(List<Account> accounts,int sortColumn, int sortFlg)
         {
             List<Account> result = new List<Account>();
-            switch (sortColumn)
+            if (sortFlg == 0)
             {
-                case (int)Accounts.AccountNumber:
-                    result = accounts.OrderBy(s => s.AccountNumber).ToList();
-                    break;
-                case (int)Accounts.Balance:
-                    result = accounts.OrderBy(s => s.Balance).ToList();
-                    break;
-                case (int)Accounts.Firstname:
-                    result = accounts.OrderBy(s => s.Firstname).ToList();
-                    break;
-                case (int)Accounts.Lastname:
-                    result = accounts.OrderBy(s => s.Lastname).ToList();
-                    break;
-                case (int)Accounts.Age:
-                    result = accounts.OrderBy(s => s.Age).ToList();
-                    break;
-                case (int)Accounts.Employer:
-                    result = accounts.OrderBy(s => s.Employer).ToList();
-                    break;
-                case (int)Accounts.City:
-                    result = accounts.OrderBy(s => s.City).ToList();
-                    break;
-                case (int)Accounts.State:
-                    result = accounts.OrderBy(s => s.State).ToList();
-                    break;
+                switch (sortColumn)
+                {
+                    case (int)Accounts.AccountNumber:
+                        result = accounts.OrderBy(s => s.AccountNumber).ToList();
+                        break;
+                    case (int)Accounts.Balance:
+                        result = accounts.OrderBy(s => s.Balance).ToList();
+                        break;
+                    case (int)Accounts.Firstname:
+                        result = accounts.OrderBy(s => s.Firstname).ToList();
+                        break;
+                    case (int)Accounts.Lastname:
+                        result = accounts.OrderBy(s => s.Lastname).ToList();
+                        break;
+                    case (int)Accounts.Age:
+                        result = accounts.OrderBy(s => s.Age).ToList();
+                        break;
+                    case (int)Accounts.Employer:
+                        result = accounts.OrderBy(s => s.Employer).ToList();
+                        break;
+                    case (int)Accounts.City:
+                        result = accounts.OrderBy(s => s.City).ToList();
+                        break;
+                    case (int)Accounts.State:
+                        result = accounts.OrderBy(s => s.State).ToList();
+                        break;
+                }
             }
+            else
+            {
+                switch (sortColumn)
+                {
+                    case (int)Accounts.AccountNumber:
+                        result = accounts.OrderByDescending(s => s.AccountNumber).ToList();
+                        break;
+                    case (int)Accounts.Balance:
+                        result = accounts.OrderByDescending(s => s.Balance).ToList();
+                        break;
+                    case (int)Accounts.Firstname:
+                        result = accounts.OrderByDescending(s => s.Firstname).ToList();
+                        break;
+                    case (int)Accounts.Lastname:
+                        result = accounts.OrderByDescending(s => s.Lastname).ToList();
+                        break;
+                    case (int)Accounts.Age:
+                        result = accounts.OrderByDescending(s => s.Age).ToList();
+                        break;
+                    case (int)Accounts.Employer:
+                        result = accounts.OrderByDescending(s => s.Employer).ToList();
+                        break;
+                    case (int)Accounts.City:
+                        result = accounts.OrderByDescending(s => s.City).ToList();
+                        break;
+                    case (int)Accounts.State:
+                        result = accounts.OrderByDescending(s => s.State).ToList();
+                        break;
+                }
+            }
+            
             return result;
         }
     }

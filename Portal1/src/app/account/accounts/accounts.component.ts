@@ -77,11 +77,11 @@ export class AccountsComponent implements OnInit {
   openPopUp(){
     this.modalService.open(SearchAccountComponent);
   }
-  sortBy(sortColumn: any){
+  sortBy(sortColumn: any,sortFlag: any){
     if(localStorage.getItem('pageNumber') != null){
       this.pageNumber = +localStorage.getItem('pageNumber');
     }
-    this.accountService.getAccountsSortted(this.pageNumber,sortColumn).subscribe(
+    this.accountService.getAccountsSortted(this.pageNumber,sortColumn,sortFlag).subscribe(
       result => {
         this.accounts = result.items;
       this.pageNumber = result.pageIndex;

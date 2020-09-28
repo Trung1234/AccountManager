@@ -18,17 +18,52 @@
   <table class="table table-sm table-hover" >
     <thead>
       <tr>
-        <th  (click)="sortBy(0)">Account Number</th>
-        <th (click)="sortBy(1)">Balance</th>
-        <th (click)="sortBy(2)">First Name</th>
-        <th (click)="sortBy(3)">Last Name</th>
-        <th (click)="sortBy(4)">Age</th>
+        <th  >
+          <button type="button" class="btn btn-primary btn-sm" (click)="sortBy(0, 0)">↑</button>
+          Account Number
+          <button type="button" class="btn btn-primary btn-sm" (click)="sortBy(0, 1)">↓</button>
+        <th >
+          <button type="button" class="btn btn-primary btn-sm" (click)="sortBy(1, 0)">↑</button>
+          Balance
+          <button type="button" class="btn btn-primary btn-sm" (click)="sortBy(1, 1)">↓</button>
+        </th>
+        <th>
+          <button type="button" class="btn btn-primary btn-sm" (click)="sortBy(2, 0)">↑</button>
+          First Name
+          <button type="button" class="btn btn-primary btn-sm" (click)="sortBy(2, 1)">↓</button>
+        </th>
+        <th >
+          <button type="button" class="btn btn-primary btn-sm" (click)="sortBy(3, 0)">↑</button>
+          Last Name
+          <button type="button" class="btn btn-primary btn-sm" (click)="sortBy(3, 1)">↓</button>
+        </th>
+        <th >
+          <button type="button" class="btn btn-primary btn-sm" (click)="sortBy(4, 0)">↑</button>
+          Age
+          <button type="button" class="btn btn-primary btn-sm" (click)="sortBy(4, 1)">↓</button>
+        </th>
         <th>Gender</th>
-        <th (click)="sortBy(5)">Address</th>
-        <th (click)="sortBy(6)">Employer</th>
+        <th >
+
+          Address
+
+        </th>
+        <th >
+          <button type="button" class="btn btn-primary btn-sm" (click)="sortBy(6, 0)">↑</button>
+          Employer
+          <button type="button" class="btn btn-primary btn-sm" (click)="sortBy(6, 1)">↓</button>
+        </th>
         <th >Email</th>
-        <th (click)="sortBy(7)">City</th>
-        <th (click)="sortBy(8)">State</th>
+        <th >
+          <button type="button" class="btn btn-primary btn-sm" (click)="sortBy(7, 0)">↑</button>
+          City
+          <button type="button" class="btn btn-primary btn-sm" (click)="sortBy(7, 1)">↓</button>
+        </th>
+        <th >
+          <button type="button" class="btn btn-primary btn-sm" (click)="sortBy(8, 0)">↑</button>
+          State
+          <button type="button" class="btn btn-primary btn-sm" (click)="sortBy(8, 1)">↓</button>
+        </th>
         <th>Action</th>
       </tr>
     </thead>
