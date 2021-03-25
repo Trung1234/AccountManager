@@ -9,3 +9,4 @@
 		Add-Migration InitialCreate
     + Create your database and create your schema from the migration:  
 		Update-Database
+## Refference: https://youtu.be/MGCC2zTb0t4
