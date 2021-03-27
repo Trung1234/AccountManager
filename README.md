@@ -1,5 +1,8 @@
 # Account Management Application
-## Web App using Angular 9 and .NET Core 2.2,Entity Framework Core, Identity ASP.NET Core
+## Web App 
+- using Angular 9 and .NET Core 2.2,Entity Framework Core
+- Using Identity ASP.NET Core to manages users, passwords, profile data, roles
+- Secure REST APIs using JWT
 ## To Run App:
 - Client: 
 	+ npm install
