@@ -4,7 +4,7 @@
 - Use Store_Paging_Usp_GetAllAccounts.sql
 ## Web App 
 - using Angular 9 and .NET Core 2.2,Entity Framework Core
-- Using Identity ASP.NET Core to manages users, passwords, profile data, roles
+- Using Identity ASP.NET Core to manage users, passwords, profile data, roles
 - Secure REST APIs using JWT
 ## To Run App:
 - Client: 
