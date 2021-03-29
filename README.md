@@ -1,6 +1,6 @@
 # Account Management Application
 ## To do
-- Indexing for Account
+- Indexing for Account: https://docs.microsoft.com/en-us/ef/core/modeling/indexes?tabs=data-annotations
 - Use Store_Paging_Usp_GetAllAccounts.sql
 ## Web App 
 - using Angular 9 and .NET Core 2.2,Entity Framework Core
