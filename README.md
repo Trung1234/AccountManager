@@ -1,4 +1,7 @@
 # Account Management Application
+## To do
+- Indexing for Account
+- Use Store_Paging_Usp_GetAllAccounts.sql
 ## Web App 
 - using Angular 9 and .NET Core 2.2,Entity Framework Core
 - Using Identity ASP.NET Core to manages users, passwords, profile data, roles
