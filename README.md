@@ -1,7 +1,4 @@
 # Account Management Application
-## To do
-- Indexing for Account: https://docs.microsoft.com/en-us/ef/core/modeling/indexes?tabs=data-annotations
-- Use Store_Paging_Usp_GetAllAccounts.sql
 ## Web App 
 - using Angular 9 and .NET Core 2.2,Entity Framework Core, SQL Server 2019
 - Using Identity ASP.NET Core to manage users, passwords, profile data, roles
@@ -17,4 +14,5 @@
 		Update-Database
 ## Refference: 
 - https://youtu.be/MGCC2zTb0t4
+- https://docs.microsoft.com/en-us/ef/core/modeling/indexes?tabs=data-annotations
 - https://topdev.vn/blog/jwt-la-gi/
