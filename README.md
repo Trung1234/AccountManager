@@ -19,4 +19,5 @@
 - https://youtu.be/MGCC2zTb0t4
 - https://docs.microsoft.com/en-us/ef/core/modeling/indexes?tabs=data-annotations
 - https://www.codaffection.com/angular-article/angular-5-login-and-logout-with-web-api-using-token-based-authentication/
+- https://dev.to/kushagra_mehta/from-zero-to-hero-l-in-authentication-part-1-38od
 - https://topdev.vn/blog/jwt-la-gi/
