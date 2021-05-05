@@ -9,6 +9,7 @@
     + ng serve -o
 - API:
     + Delete all files in folder Migrations 
+    + Change DefaultConnection to your Connection Strings
     + For database migration , we need to follow the following steps.
 		- Tools -> NuGet Package Manager -> Package Manager Console.
 		- Run PM> Add-Migration MyFirstMigration to scaffold a migration to create the initial set of tables for our model. 	
