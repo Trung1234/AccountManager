@@ -21,7 +21,7 @@
    + In GET method, values are visible in the URL while in POST method, values are NOT visible in the URL.
    + GET has a limitation on the length of the values, generally 255 characters whereas POST has no limitation on the length of the values since they are submitted via the body of HTTP.
    +  GET request is often cacheable while POST request is hardly cacheable.
-   +	POST is more secure than GET	
+   +  GET is less secure compared to POST because data sent is part of the URL. So it's saved in browser history and server logs in plaintext.
     
 
 
