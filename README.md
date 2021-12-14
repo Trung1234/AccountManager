@@ -27,6 +27,7 @@
 
 ## Refference: 
 - https://youtu.be/MGCC2zTb0t4
+- RESTful web API design: https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design
 - https://docs.microsoft.com/en-us/aspnet/core/web-api/advanced/formatting?view=aspnetcore-5.0
 - https://docs.microsoft.com/en-us/ef/core/modeling/indexes?tabs=data-annotations
 - https://www.codaffection.com/angular-article/angular-5-login-and-logout-with-web-api-using-token-based-authentication/
