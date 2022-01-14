@@ -28,6 +28,7 @@
 ## Refference: 
 - https://youtu.be/MGCC2zTb0t4
 - https://duypt.dev/localstorage-va-cookies-chon-cai-nao-de-luu-jwt-tokens-hieu-qua-va-an-toan/
+- https://stackoverflow.com/questions/27067251/where-to-store-jwt-in-browser-how-to-protect-against-csrf?fbclid=IwAR11mDyv5Gd_7JTkHQRiSWLU7REYiGv9RbywX7GUUKMgTkySum0s5DUAzH4
 - RESTful web API design: https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design
 - https://docs.microsoft.com/en-us/aspnet/core/web-api/advanced/formatting?view=aspnetcore-5.0
 - https://docs.microsoft.com/en-us/ef/core/modeling/indexes?tabs=data-annotations
